@@ -22,7 +22,7 @@ const LoginCheckReducer=(state=initalLoginState,action)=>{
             return{
                 ...state,
                 email:[...state.email,action.useremail],
-                password:[...state.email,action.userpassword]
+                password:[...state.password,action.userpassword]
             }
             default:
                 return{

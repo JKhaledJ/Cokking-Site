@@ -25,7 +25,7 @@ class Login extends Component {
    
     handleSubmit=(event)=>{
         event.preventDefault();
-        if(event.target[0].value===this.props.email && event.target[1].value===this.props.password){
+        if(event.target[0].value==this.props.email && event.target[1].value==this.props.password){
      
            {this.props.LoginAction()}
            this.props.history.push('/')
