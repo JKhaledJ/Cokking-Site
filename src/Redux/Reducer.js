@@ -4,14 +4,16 @@ const initalLoginState = {
     email: ['ab@gmail.com'],
     password: ['123'],
     error: '',
-    check:false
+    check:false,
+    currentUser:''
 }
 const LoginCheckReducer=(state=initalLoginState,action)=>{
     switch(action.type){
         case LOGIN:
             return{
                 ...state,
-                check:true
+                check:true,
+                currentUser:action.currentUser                
             }
         case LOGOUT:
             return{
@@ -21,6 +23,7 @@ const LoginCheckReducer=(state=initalLoginState,action)=>{
         case REGISTER:
             return{
                 ...state,
+                name:[...state.name,action.username],
                 email:[...state.email,action.useremail],
                 password:[...state.password,action.userpassword]
             }

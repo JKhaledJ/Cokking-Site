@@ -1,27 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Switch, Route, Link, Router } from "react-router-dom";
-import {CheckLogin,CheckLogout} from './Redux/Action'
+import {Link } from "react-router-dom";
+import {CheckLogout} from './Redux/Action'
 import { connect } from 'react-redux'
-import Login from './Login.js'
-import Main from './Main.js';
+
 
 const mapStateToProps = (state) => {
     return {
         name: state.name,
-        check: state.check
+        check: state.check,
+        cUser:state.currentUser
     }
 }
 const mapActionDispatch=(dispatch)=>{
     return{
-        LoginAction:()=>dispatch(CheckLogin()),
+       // LoginAction:(cu)=>dispatch(CheckLogin(cu)),
         LogoutAction:()=>dispatch(CheckLogout())
     }
 }
 
  function Header(props) {
-    console.log(props.check)
     return (
        
         <div>
@@ -43,10 +42,10 @@ const mapActionDispatch=(dispatch)=>{
                 </Nav>
                 <Nav>
                    
-                            { (props.check==true)? <button style={{background:'grey'}} class="nav-link">{props.name}</button>: <Link to="/login" style={{background:'grey'}} class="nav-link" >Login</Link>}
+                            { (props.check==true)? <button style={{background:'none',border:'none'}} class="nav-link">{props.cUser}</button>: <Link to="/login" style={{background:'none'}} class="nav-link" >Login</Link>}
                    
                     
-                        { (props.check==true)?<button style={{background:'grey'}} class="nav-link" onClick={props.LogoutAction}  >Logout</button>:<button style={{background:'grey'}} class="nav-link" >Register</button>} 
+                        { (props.check==true)?<button style={{background:'none',border:'none'}} class="nav-link" onClick={props.LogoutAction}  >Logout</button>:<Link to="/Register" style={{background:'none'}} class="nav-link" >Register</Link>} 
                   
                 </Nav>
             </Navbar.Collapse>

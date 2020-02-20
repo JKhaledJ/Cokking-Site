@@ -11,42 +11,35 @@ const mapStateToProps = (state) => {
         name: state.name,
         email: state.email,
         password: state.password,
-        error: state.error,
         check: state.check
     }
 }
 const mapActionDispatch=(dispatch)=>{
     return{
-        LoginAction:()=>dispatch(CheckLogin()),
+        LoginAction:(cu)=>dispatch(CheckLogin(cu)),
         LogoutAction:()=>dispatch(CheckLogout())
     }
 }
 class Login extends Component {
    
     handleSubmit=(event)=>{
+        let flag=true
         event.preventDefault();
-        if(event.target[0].value==this.props.email && event.target[1].value==this.props.password){
+        for(let i=0;i<this.props.email.length;i++){
+            if(event.target[0].value.toLowerCase()==this.props.email[i] && event.target[1].value==this.props.password[i]){
      
-           {this.props.LoginAction()}
-           this.props.history.push('/')
+                {this.props.LoginAction(this.props.name[i])}
+                this.props.history.push('/')
+             }
+            
+         }
+         if(flag){
+             console.log("Wrong Email/password.")
+         }
         }
-        else{
-           console.log("wrong")
-        }
-    }
-
-    // handleUserChange=(evt)=> {
-    //     this.setState({
-    //         email: evt.target.value,
-    //     });
-    // };
-
-    // handlePassChange=(evt)=> {
-    //     this.setState({
-    //         password: evt.target.value,
-    //     });
-    // }
-   
+        
+    
+  
 
     render() {
 
